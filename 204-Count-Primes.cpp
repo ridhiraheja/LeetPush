@@ -1,14 +1,16 @@
 class Solution {
 public:
     int countPrimes(int n) {
+        if(n<=1) return 0;
         int sq=sqrt(n);
-        vector<bool>prime(n+1,true);
+        bool prime[n+1];
+        memset(prime,true,sizeof(prime));
         
         prime[0]=false;
         prime[1]=false;
         for(int i=2;i<=sq;i++){
             if(prime[i]==true){
-                for(int j=i*i;j<n;j+=i){
+                for(int j=i*i;j<=n;j+=i){
                     prime[j]=false;
 
                 }
