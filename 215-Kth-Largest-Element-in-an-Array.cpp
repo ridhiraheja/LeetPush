@@ -5,14 +5,15 @@ public:
         int j=r;
         int p=nums[l];
         while(i<=j){
-            if(nums[i]<p && nums[j]>p){
-                swap(nums[i],nums[j]);
+            while(i<=r && nums[i]<=p) {
                 i++;
+            }
+            while(j>=l && nums[j]>p) {
                 j--;
             }
-            if(nums[i]>=p) i++;
-            if(nums[j]<=p) j--;
-
+            if(i<j) {
+                swap(nums[i],nums[j]);
+            }
         }
         swap(nums[l],nums[j]);
         return j;
@@ -21,14 +22,14 @@ public:
         int n=nums.size();
         int l=0;
         int r=n-1;
-        int pivot=0;
+        int target = n-k;
         while(true){
-            pivot=partition(nums,l,r);
-            if(pivot==k-1) break;
-            if(pivot>k-1) r=pivot-1;
+            int pivot=partition(nums,l,r);
+            if(pivot==target) return nums[pivot];
+            else if(pivot>target) r=pivot-1;
             else l=pivot+1;
         }
-        return nums[pivot];
+        
     }
 };
 
